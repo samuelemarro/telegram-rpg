@@ -27,11 +27,6 @@ def character_status(update, context):
 
     update.message.reply_markdown(message)
 
-
-
-
-
-
 # Usare un TextHandler con una stringa iniziale particolare (tipo ?), in modo da poter
 # interpretare anche la descrizione. In alternativa puoi usare tutti i caratteri spaziati
 # come il contenuto della descrizione.
@@ -47,10 +42,6 @@ def money(update, context):
 def effect(update, context):
     #add/remove
     #"All" support?
-    pass
-
-def action(update, context):
-    #add/remove
     pass
 
 def victory_points(update, context):
