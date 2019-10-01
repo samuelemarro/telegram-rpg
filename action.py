@@ -34,12 +34,14 @@ def add_action(update, context):
     if len(args) == 0:
         update.message.reply_text('/add action [personaggio] |[nome]|[usi]|[descrizione]|[condizioni]')
         return
-    else:
-        character_name = args.pop(0)
 
-        if character_name not in session.state.character_names:
-            update.message.reply_markdown('Il personaggio "{}" non esiste.'.format(character_name))
-            return
+    character_name = args.pop(0)
+
+    character = session.get_character(character_name)
+
+    if character is None:
+        update.message.reply_markdown('Il personaggio "{}" non esiste.'.format(character_name))
+        return
 
 
     text = ' '.join(args)
@@ -53,6 +55,10 @@ def add_action(update, context):
         return
 
     name = action_args[0]
+
+    if name in [x.name for x in character.actions]:
+        update.message.reply_markdown('Il personaggio "{}" ha già l\'azione "{}".'.format(character_name, name))
+        return
 
     try:
         uses = int(action_args[1])
@@ -71,8 +77,6 @@ def add_action(update, context):
         conditions = None
 
     action = Action(name, description, conditions=conditions, uses=uses)
-
-    character = next(x for x in session.state.characters if x.name == character_name)
 
     character.actions.append(action)
     character.pending_messages.append('Hai ricevuto una nuova azione:\n{}'.format(action))

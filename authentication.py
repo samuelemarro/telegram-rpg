@@ -83,7 +83,7 @@ class UserFilter(Handler):
 
         if self.user_type == 'gm':
             if telegram_id == session.gm_telegram_id:
-                logger.info('Confirmed GM.')
+                logger.debug('Confirmed GM.')
                 return self.handler.check_update(update)
         elif self.user_type == 'player':
             if telegram_id in session.get_user_ids():

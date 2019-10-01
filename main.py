@@ -29,12 +29,14 @@ def hello(update, context):
 
 def start_server(telegram_token):
     updater = Updater(telegram_token, use_context=True)
+    logger.info('Created updater.')
 
     session.updater = updater
 
     for handler in session.handlers:
         updater.dispatcher.add_handler(handler)
 
+    logger.info('Beginning polling.')
     updater.start_polling()
     while True:
         pass

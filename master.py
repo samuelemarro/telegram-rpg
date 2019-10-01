@@ -71,7 +71,7 @@ def pick_action(update, context):
 
 def add(update, context):
     if len(context.args) == 0:
-        update.message.reply_markdown('Per favore usa /add [sotto-comando] [...]')
+        update.message.reply_markdown('/add [sotto-comando] [...]')
         return
 
     sub_command = context.args.pop(0)
@@ -82,12 +82,15 @@ def add(update, context):
     elif sub_command == 'action':
         from action import add_action
         add_action(update, context)
+    elif sub_command == 'effect':
+        from effect import add_effect
+        add_effect(update, context)
     else:
         update.message.reply_markdown('Sotto-comando "{}" non riconosciuto'.format(sub_command))
 
 def _del(update, context):
     if len(context.args) == 0:
-        update.message.reply_markdown('Per favore usa /del [sotto-comando] [...]')
+        update.message.reply_markdown('/del [sotto-comando] [...]')
         return
 
     sub_command = context.args.pop(0)

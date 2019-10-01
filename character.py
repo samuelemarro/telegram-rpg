@@ -20,17 +20,20 @@ class Character:
         
         status += '{}k franchi, {} PV\n\n'.format(self.money, self.victory_points)
 
-        status += 'Effetti:\n\n'
+        status += 'Effetti:\n'
 
-        status += '\n\n'.join([str(x) for x in self.effects])
+        if len(self.effects) > 0:
+            status += '\n' + '\n\n'.join([str(x) for x in self.effects]) + '\n'
 
-        status += 'Obiettivi:\n\n'
+        status += 'Obiettivi:\n'
 
-        status += '\n\n'.join([str(x) for x in self.objectives])
+        if len(self.objectives) > 0:
+            status += '\n' + '\n'.join([str(x) for x in self.objectives]) + '\n'
 
-        status += 'Actions:\n\n'
+        status += 'Azioni:\n'
 
-        status += '\n\n'.join([str(x) for x in self.actions])
+        if len(self.actions) > 0:
+            status += '\n' + '\n'.join([str(x) for x in self.actions])
 
         return status
 
